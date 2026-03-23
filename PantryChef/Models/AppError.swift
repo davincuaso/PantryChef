@@ -17,7 +17,7 @@ enum AppError: LocalizedError {
     case invalidURL
     case invalidResponse
     case decodingError(Error)
-    case apiKeyMissing
+    case noRecipesFound
     case rateLimitExceeded
     case unknown(Error)
 
@@ -39,8 +39,8 @@ enum AppError: LocalizedError {
             return "Invalid response from server"
         case .decodingError(let error):
             return "Failed to parse response: \(error.localizedDescription)"
-        case .apiKeyMissing:
-            return "Spoonacular API key is missing. Please add your API key."
+        case .noRecipesFound:
+            return "No recipes found for these ingredients"
         case .rateLimitExceeded:
             return "API rate limit exceeded. Please try again later."
         case .unknown(let error):
@@ -58,8 +58,8 @@ enum AppError: LocalizedError {
             return "Make sure ingredients are clearly visible and try again"
         case .networkError:
             return "Check your internet connection and try again"
-        case .apiKeyMissing:
-            return "Add your Spoonacular API key in the app configuration"
+        case .noRecipesFound:
+            return "Try adding different ingredients or check your spelling"
         case .rateLimitExceeded:
             return "Wait a few minutes before making another request"
         default:

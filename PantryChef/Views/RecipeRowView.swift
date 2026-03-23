@@ -62,15 +62,22 @@ struct RecipeRowView: View {
                     )
                 }
 
-                // Likes count if available
-                if let likes = recipe.likes, likes > 0 {
+                // Category and area info
+                if let category = recipe.category {
                     HStack(spacing: 4) {
-                        Image(systemName: "heart.fill")
+                        Image(systemName: "tag.fill")
                             .font(.caption2)
-                            .foregroundStyle(.red)
-                        Text("\(likes)")
+                            .foregroundStyle(.blue)
+                        Text(category)
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                        if let area = recipe.area {
+                            Text("•")
+                                .foregroundStyle(.secondary)
+                            Text(area)
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
@@ -112,16 +119,20 @@ struct IngredientBadge: View {
 #Preview {
     List {
         RecipeRowView(recipe: Recipe(
-            id: 1,
-            title: "Delicious Chicken Stir Fry with Vegetables",
-            image: "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-            imageType: "jpg",
-            usedIngredientCount: 3,
-            missedIngredientCount: 2,
-            usedIngredients: [],
-            missedIngredients: [],
-            unusedIngredients: nil,
-            likes: 150
+            id: "52772",
+            title: "Teriyaki Chicken Casserole",
+            image: "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
+            category: "Chicken",
+            area: "Japanese",
+            instructions: nil,
+            youtubeURL: nil,
+            usedIngredients: [
+                RecipeIngredient(id: 0, name: "chicken", measure: "1 lb")
+            ],
+            missedIngredients: [
+                RecipeIngredient(id: 1, name: "soy sauce", measure: "2 tbsp"),
+                RecipeIngredient(id: 2, name: "rice", measure: "1 cup")
+            ]
         ))
     }
 }

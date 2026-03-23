@@ -1,23 +1,23 @@
 # PantryChef: AI Recipe Generator
 
 ## Overview
-PantryChef eliminates food waste by helping users cook with what they already have. By snapping a photo of ingredients, the app uses on-device Vision capabilities to identify food items and fetches highly-rated recipes matching those ingredients.
+PantryChef eliminates food waste by helping users cook with what they already have. By snapping a photo of ingredients, the app uses on-device Vision capabilities to identify food items and fetches recipes matching those ingredients.
 
 ## Key Features
 * **Ingredient Recognition:** Utilizes Apple's Vision framework to detect text/objects in photos
-* **Recipe Fetching:** Integrates with the Spoonacular API to find relevant meals
+* **Recipe Fetching:** Integrates with TheMealDB API (free, no API key required)
 * **Missing Ingredient Breakdown:** Shows exactly what you have and what you still need for a recipe
+* **Recipe Instructions:** Full cooking instructions and YouTube video links
 
 ## Tech Stack
 * **Framework:** SwiftUI
 * **Image Processing:** Vision framework & Core ML
 * **Networking:** URLSession (async/await), Codable
-* **API:** Spoonacular Recipe API
+* **API:** TheMealDB (free, no API key required)
 
 ## Requirements
 * iOS 17.0+
 * Xcode 15.0+
-* Spoonacular API Key
 
 ## Setup
 
@@ -27,22 +27,10 @@ git clone <repository-url>
 cd PantryChef
 ```
 
-### 2. Get a Spoonacular API Key
-1. Visit [Spoonacular API](https://spoonacular.com/food-api)
-2. Sign up for a free account
-3. Navigate to your profile to find your API key
-
-### 3. Configure the API Key
-Set your API key as an environment variable in Xcode:
-1. Edit the scheme (Product > Scheme > Edit Scheme)
-2. Select "Run" in the sidebar
-3. Go to the "Arguments" tab
-4. Add an environment variable: `SPOONACULAR_API_KEY` = `your_api_key`
-
-Alternatively, replace `YOUR_API_KEY_HERE` in `SpoonacularService.swift` (not recommended for production).
-
-### 4. Build and Run
+### 2. Build and Run
 Open `PantryChef.xcodeproj` in Xcode and run on a simulator or device.
+
+No API key configuration needed - TheMealDB is completely free!
 
 ## Project Structure
 
@@ -54,7 +42,7 @@ PantryChef/
 │   └── AppError.swift           # Custom error types
 ├── Services/
 │   ├── VisionService.swift      # Vision framework for image analysis
-│   └── SpoonacularService.swift # API networking layer
+│   └── RecipeService.swift      # TheMealDB API networking layer
 ├── Views/
 │   ├── ContentView.swift        # Main app interface
 │   ├── ImagePicker.swift        # Camera/photo library picker
@@ -73,24 +61,24 @@ PantryChef/
 5. Results are filtered against a curated food keyword list
 
 ### Networking
-1. Extracted ingredients are joined into a comma-separated query
+1. Extracted ingredients are used to search TheMealDB
 2. `URLSession.shared.data(from:)` with `await` fetches recipes
 3. Response is decoded using `Codable` into `Recipe` structs
 4. All network calls run off the main thread via Swift Concurrency
 
 ### JSON Parsing
-The `Recipe` and `RecipeIngredient` models conform to `Codable`:
+The `MealDBMeal` and `Recipe` models handle TheMealDB's response format:
 - Automatic key mapping from JSON to Swift properties
-- Support for optional fields and nested objects
+- Ingredients are extracted from numbered fields (strIngredient1-20)
 - Type-safe parsing with error handling
 
 ## Usage
 
 1. **Capture Ingredients:** Tap the camera button to take a photo or select from library
 2. **Review Detection:** View recognized ingredients as removable chips
-3. **Search Recipes:** Tap "Find Recipes" to query the Spoonacular API
+3. **Search Recipes:** Tap "Find Recipes" to query TheMealDB
 4. **Browse Results:** Scroll through recipes showing used/missing ingredients
-5. **View Details:** Tap a recipe for full ingredient breakdown
+5. **View Details:** Tap a recipe for full instructions and YouTube video link
 
 ## Privacy
 
@@ -100,13 +88,13 @@ The app requires the following permissions:
 
 All image processing happens on-device using Apple's Vision framework.
 
-## API Rate Limits
+## TheMealDB API
 
-The free Spoonacular tier includes:
-- 150 requests/day
-- Access to recipe search endpoints
-
-Consider upgrading for production use.
+This app uses [TheMealDB](https://www.themealdb.com/api.php), a free and open recipe database:
+- No API key required for basic usage
+- Thousands of recipes from around the world
+- Includes cooking instructions and video tutorials
+- Ingredient images provided
 
 ## Future Enhancements
 

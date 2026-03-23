@@ -13,7 +13,7 @@
 		1A0000000000000000000004 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000014 /* Recipe.swift */; };
 		1A0000000000000000000005 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000015 /* AppError.swift */; };
 		1A0000000000000000000006 /* VisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000016 /* VisionService.swift */; };
-		1A0000000000000000000007 /* SpoonacularService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000017 /* SpoonacularService.swift */; };
+		1A0000000000000000000007 /* RecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000017 /* RecipeService.swift */; };
 		1A0000000000000000000008 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000018 /* ImagePicker.swift */; };
 		1A0000000000000000000009 /* RecipeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0000000000000000000019 /* RecipeRowView.swift */; };
 		1A000000000000000000000A /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A000000000000000000001A /* RecipeDetailView.swift */; };
@@ -27,7 +27,7 @@
 		1A0000000000000000000014 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		1A0000000000000000000015 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		1A0000000000000000000016 /* VisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionService.swift; sourceTree = "<group>"; };
-		1A0000000000000000000017 /* SpoonacularService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoonacularService.swift; sourceTree = "<group>"; };
+		1A0000000000000000000017 /* RecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeService.swift; sourceTree = "<group>"; };
 		1A0000000000000000000018 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		1A0000000000000000000019 /* RecipeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRowView.swift; sourceTree = "<group>"; };
 		1A000000000000000000001A /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				1A0000000000000000000016 /* VisionService.swift */,
-				1A0000000000000000000017 /* SpoonacularService.swift */,
+				1A0000000000000000000017 /* RecipeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 				1A0000000000000000000004 /* Recipe.swift in Sources */,
 				1A0000000000000000000005 /* AppError.swift in Sources */,
 				1A0000000000000000000006 /* VisionService.swift in Sources */,
-				1A0000000000000000000007 /* SpoonacularService.swift in Sources */,
+				1A0000000000000000000007 /* RecipeService.swift in Sources */,
 				1A0000000000000000000008 /* ImagePicker.swift in Sources */,
 				1A0000000000000000000009 /* RecipeRowView.swift in Sources */,
 				1A000000000000000000000A /* RecipeDetailView.swift in Sources */,

@@ -27,7 +27,7 @@ struct ContentView: View {
 
     // Services
     private let visionService = VisionService()
-    private let spoonacularService = SpoonacularService()
+    private let recipeService = RecipeService()
 
     // MARK: - Body
 
@@ -292,7 +292,7 @@ struct ContentView: View {
 
         Task {
             do {
-                let fetchedRecipes = try await spoonacularService.findRecipes(
+                let fetchedRecipes = try await recipeService.findRecipes(
                     byIngredients: recognizedIngredients
                 )
                 await MainActor.run {

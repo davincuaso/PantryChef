@@ -47,6 +47,22 @@ struct RecipeDetailView: View {
                     Text(recipe.title)
                         .font(.title2.bold())
 
+                    // Category and Area
+                    if recipe.category != nil || recipe.area != nil {
+                        HStack(spacing: 12) {
+                            if let category = recipe.category {
+                                Label(category, systemImage: "tag.fill")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.blue)
+                            }
+                            if let area = recipe.area {
+                                Label(area, systemImage: "globe")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.green)
+                            }
+                        }
+                    }
+
                     // Stats Row
                     HStack(spacing: 20) {
                         StatView(
@@ -84,13 +100,38 @@ struct RecipeDetailView: View {
                         )
                     }
 
-                    // Unused Ingredients Section
-                    if let unusedIngredients = recipe.unusedIngredients, !unusedIngredients.isEmpty {
-                        IngredientSection(
-                            title: "Won't Be Used",
-                            ingredients: unusedIngredients,
-                            color: .gray
-                        )
+                    // Instructions Section
+                    if let instructions = recipe.instructions, !instructions.isEmpty {
+                        Divider()
+
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Instructions")
+                                .font(.headline)
+
+                            Text(instructions)
+                                .font(.body)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    // YouTube Link
+                    if let youtubeURL = recipe.youtubeURL,
+                       let url = URL(string: youtubeURL) {
+                        Divider()
+
+                        Link(destination: url) {
+                            HStack {
+                                Image(systemName: "play.circle.fill")
+                                    .foregroundStyle(.red)
+                                Text("Watch on YouTube")
+                                    .font(.headline)
+                                Spacer()
+                                Image(systemName: "arrow.up.right")
+                            }
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
                     }
                 }
                 .padding()
@@ -182,9 +223,11 @@ struct IngredientRow: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(ingredient.name.capitalized)
                     .font(.subheadline)
-                Text(ingredient.displayAmount)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                if !ingredient.measure.isEmpty {
+                    Text(ingredient.measure)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Spacer()
@@ -198,57 +241,21 @@ struct IngredientRow: View {
 #Preview {
     NavigationStack {
         RecipeDetailView(recipe: Recipe(
-            id: 1,
-            title: "Chicken Stir Fry with Fresh Vegetables",
-            image: "https://spoonacular.com/recipeImages/716429-312x231.jpg",
-            imageType: "jpg",
-            usedIngredientCount: 3,
-            missedIngredientCount: 2,
+            id: "52772",
+            title: "Teriyaki Chicken Casserole",
+            image: "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
+            category: "Chicken",
+            area: "Japanese",
+            instructions: "Preheat oven to 350 degrees F. Combine soy sauce, water, brown sugar, and garlic in a bowl. Place chicken in a 9x13 baking dish and pour sauce over chicken. Bake for 30 minutes.",
+            youtubeURL: "https://www.youtube.com/watch?v=4aZr5hZXP_s",
             usedIngredients: [
-                RecipeIngredient(
-                    id: 1,
-                    amount: 2,
-                    unit: "lbs",
-                    unitLong: "pounds",
-                    unitShort: "lbs",
-                    aisle: "Meat",
-                    name: "chicken breast",
-                    original: "2 lbs chicken breast",
-                    originalName: "chicken breast",
-                    meta: nil,
-                    image: "chicken-breast.jpg"
-                ),
-                RecipeIngredient(
-                    id: 2,
-                    amount: 1,
-                    unit: "cup",
-                    unitLong: "cup",
-                    unitShort: "cup",
-                    aisle: "Vegetables",
-                    name: "broccoli",
-                    original: "1 cup broccoli",
-                    originalName: "broccoli",
-                    meta: nil,
-                    image: "broccoli.jpg"
-                )
+                RecipeIngredient(id: 0, name: "chicken breast", measure: "1 lb"),
+                RecipeIngredient(id: 1, name: "garlic", measure: "3 cloves")
             ],
             missedIngredients: [
-                RecipeIngredient(
-                    id: 3,
-                    amount: 2,
-                    unit: "tbsp",
-                    unitLong: "tablespoons",
-                    unitShort: "tbsp",
-                    aisle: "Condiments",
-                    name: "soy sauce",
-                    original: "2 tbsp soy sauce",
-                    originalName: "soy sauce",
-                    meta: nil,
-                    image: "soy-sauce.jpg"
-                )
-            ],
-            unusedIngredients: nil,
-            likes: 150
+                RecipeIngredient(id: 2, name: "soy sauce", measure: "3/4 cup"),
+                RecipeIngredient(id: 3, name: "brown sugar", measure: "1/2 cup")
+            ]
         ))
     }
 }
