@@ -1,0 +1,23 @@
+[
+  {
+    "image": "screens/screen-01.png",
+    "editable": "screens/screen-01.svg",
+    "caption": "Ingredient review and recipes",
+    "kind": "recreated",
+    "source_commit": "35de6c2374cdc672c63899cb320fb48b13440573",
+    "source_files": [
+      "PantryChef/Views/ContentView.swift",
+      "PantryChef/Views/RecipeRowView.swift"
+    ]
+  },
+  {
+    "image": "screens/screen-02.png",
+    "editable": "screens/screen-02.svg",
+    "caption": "Recipe detail",
+    "kind": "recreated",
+    "source_commit": "35de6c2374cdc672c63899cb320fb48b13440573",
+    "source_files": [
+      "PantryChef/Views/RecipeDetailView.swift"
+    ]
+  }
+]
